@@ -1,7 +1,7 @@
 /** @format */
 
 import React from 'react';
-import RegisterModule from '../layouts/register/RegisterModule';
+import RegisterModule from '../components/register/RegisterModule';
 import { Container, Col, Row, Card } from 'reactstrap';
 
 const AuthenticationPage = () => {
