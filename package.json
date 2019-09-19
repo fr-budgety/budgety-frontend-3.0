@@ -1,28 +1,9 @@
 {
-  "name": "argon-dashboard-react",
+  "name": "budgety-frontend",
   "version": "1.0.0",
-  "description": "React version of Argon Dashboard by Creative Tim",
+  "description": "Budgety frontend",
   "main": "index.js",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/creativetimofficial/argon-dashboard-react.git"
-  },
-  "keywords": [
-    "react",
-    "reactjs",
-    "argon",
-    "argon-react",
-    "dashboard",
-    "dashboard-react",
-    "argon-dashboard",
-    "argon-dashboard-react"
-  ],
-  "author": "Creative Tim",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/creativetimofficial/argon-dashboard-react/issues"
-  },
-  "homepage": "https://demos.creative-tim.com/argon-dashboard-react/",
+  "author": "Filippo Rivolta",
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
@@ -31,7 +12,8 @@
     "install:clean": "rm -rf node_modules/ && rm -rf package-lock.json && npm install && npm start",
     "compile-sass": "node-sass src/assets/scss/argon-dashboard-react.scss src/assets/css/argon-dashboard-react.css",
     "minify-sass": "node-sass src/assets/scss/argon-dashboard-react.scss src/assets/css/argon-dashboard-react.min.css --output-style compressed",
-    "map-sass": "node-sass src/assets/scss/argon-dashboard-react.scss src/assets/css/argon-dashboard-react.css --source-map true"
+    "map-sass": "node-sass src/assets/scss/argon-dashboard-react.scss src/assets/css/argon-dashboard-react.css --source-map true",
+    "cypress": "cypress open"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -62,6 +44,7 @@
     "@types/googlemaps": "3.30.18",
     "@types/markerclustererplus": "2.1.33",
     "@types/react": "16.8.7",
+    "cypress": "^3.4.1",
     "typescript": "3.3.3333"
   }
 }
