@@ -12,6 +12,7 @@ ReactDOM.render(
   <BrowserRouter>
     <Switch>
       <Route path="/auth/register" render={props => <AuthenticationPage {...props} />} />
+      <Route path="/" render={props => <AuthenticationPage {...props} />} />
     </Switch>
   </BrowserRouter>,
   document.getElementById("root")

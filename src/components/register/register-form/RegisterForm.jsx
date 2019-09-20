@@ -10,20 +10,20 @@ const RegisterForm = () => {
         <InputGroup className="input-group-alternative mb-3">
           <InputGroupAddon addonType="prepend">
             <InputGroupText>
-              <i className="ni ni-hat-3" />
+              <i className="ni ni-email-83" />
             </InputGroupText>
           </InputGroupAddon>
-          <Input placeholder="Name" type="text" />
+          <Input placeholder="Email" type="email" />
         </InputGroup>
       </FormGroup>
       <FormGroup>
         <InputGroup className="input-group-alternative mb-3">
           <InputGroupAddon addonType="prepend">
             <InputGroupText>
-              <i className="ni ni-email-83" />
+              <i className="ni ni-lock-circle-open" />
             </InputGroupText>
           </InputGroupAddon>
-          <Input placeholder="Email" type="email" />
+          <Input placeholder="Password" type="password" />
         </InputGroup>
       </FormGroup>
       <FormGroup>
@@ -33,7 +33,7 @@ const RegisterForm = () => {
               <i className="ni ni-lock-circle-open" />
             </InputGroupText>
           </InputGroupAddon>
-          <Input placeholder="Password" type="password" />
+          <Input placeholder="Confirm password" type="confirmPassword" />
         </InputGroup>
       </FormGroup>
       <div className="text-muted font-italic">

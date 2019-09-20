@@ -6,7 +6,7 @@ import { Container, Col, Row, Card } from 'reactstrap';
 
 const AuthenticationPage = () => {
   return (
-    <div>
+    <div className="AuthenticationPage">
       <Container>
         <Row>
           <Col lg="6" md="8">
