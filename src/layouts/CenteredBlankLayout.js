@@ -8,7 +8,7 @@ const CenteredBlankLayout = ({ children }) => {
     <div className="main-content">
       <div className="header py-6 py-lg-6">
         <Container>
-          <div className="header-body text-center">
+          <div className="header-body">
             {children}
           </div>
         </Container>

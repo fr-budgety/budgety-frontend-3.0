@@ -4,7 +4,7 @@ import React from 'react';
 
 import { Formik } from 'formik';
 
-import { Button, FormGroup, Form, Input, InputGroupAddon, InputGroupText, InputGroup, Row, Col } from 'reactstrap';
+import { Button, FormGroup, Form, Input, InputGroup, Row, Col } from 'reactstrap';
 import { SignupSchema } from '../../../utils/validation/validationSchemas.yup';
 
 class RegisterForm extends React.Component {
@@ -32,12 +32,7 @@ class RegisterForm extends React.Component {
         {({ values, errors, touched, handleChange, handleBlur, handleSubmit, isSubmitting }) => (
           <Form role="form" onSubmit={handleSubmit} noValidate>
             <FormGroup className="EmailFormGroup">
-              <InputGroup className="input-group-alternative mb-3">
-                <InputGroupAddon addonType="prepend">
-                  <InputGroupText>
-                    <i className="ni ni-email-83" />
-                  </InputGroupText>
-                </InputGroupAddon>
+              <InputGroup>
                 <Input
                   placeholder="Email"
                   type="email"
@@ -47,39 +42,29 @@ class RegisterForm extends React.Component {
                   onBlur={handleBlur}
                   onChange={handleChange}
                   touched={touched.email}
-                  invalid={errors.email}
+                  invalid={touched.email && errors.email}
                 />
               </InputGroup>
               {errors.email && touched.email && <small className="error-message">{errors.email}</small>}
             </FormGroup>
             <FormGroup className="PasswordFormGroup">
-              <InputGroup className="input-group-alternative mb-3">
-                <InputGroupAddon addonType="prepend">
-                  <InputGroupText>
-                    <i className="ni ni-lock-circle-open" />
-                  </InputGroupText>
-                </InputGroupAddon>
+              <InputGroup>
                 <Input
                   placeholder="Password"
                   data-test="password"
                   type="password"
                   name="password"
-                  value={values.password}
                   onBlur={handleBlur}
+                  value={values.password}
                   onChange={handleChange}
                   touched={touched.password}
-                  invalid={errors.password}
+                  invalid={touched.password && errors.password}
                 />
               </InputGroup>
               {errors.password && touched.password && <small className="error-message">{errors.password}</small>}
             </FormGroup>
             <FormGroup className="ConfirmPasswordFormGroup">
-              <InputGroup className="input-group-alternative">
-                <InputGroupAddon addonType="prepend">
-                  <InputGroupText>
-                    <i className="ni ni-lock-circle-open" />
-                  </InputGroupText>
-                </InputGroupAddon>
+              <InputGroup>
                 <Input
                   placeholder="Re-type password"
                   type="password"
@@ -89,7 +74,7 @@ class RegisterForm extends React.Component {
                   onBlur={handleBlur}
                   onChange={handleChange}
                   touched={touched.confirmPassword}
-                  invalid={errors.confirmPassword}
+                  invalid={touched.confirmPassword && errors.confirmPassword}
                 />
               </InputGroup>
               {errors.confirmPassword && touched.confirmPassword && (

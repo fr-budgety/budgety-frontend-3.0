@@ -1,5 +1,12 @@
+/** @format */
+
 //
 // Input group
 //
 
-@import "../core/forms/input-group";
+@import '../core/forms/input-group';
+
+.error-message {
+  color: $form-feedback-invalid-color;
+  font-size: $font-size-xs;
+}
