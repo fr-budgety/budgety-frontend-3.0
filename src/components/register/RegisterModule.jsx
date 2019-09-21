@@ -9,7 +9,7 @@ const RegisterModule = () => {
   return (
     <>
       <CardHeader className="bg-transparent pb-5">
-        <div className="text-muted text-center mt-2 mb-4">
+        <div id="WelcomeMessage" className="text-muted text-center mt-2 mb-4">
           <small>Sign up with</small>
         </div>
         <RegisterAlt />

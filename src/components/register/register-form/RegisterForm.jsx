@@ -30,8 +30,8 @@ class RegisterForm extends React.Component {
         }}
       >
         {({ values, errors, touched, handleChange, handleBlur, handleSubmit, isSubmitting }) => (
-          <Form role="form" onSubmit={handleSubmit}>
-            <FormGroup>
+          <Form role="form" onSubmit={handleSubmit} noValidate>
+            <FormGroup className="EmailFormGroup">
               <InputGroup className="input-group-alternative mb-3">
                 <InputGroupAddon addonType="prepend">
                   <InputGroupText>
@@ -42,17 +42,17 @@ class RegisterForm extends React.Component {
                   placeholder="Email"
                   type="email"
                   name="email"
+                  data-test="email"
                   value={values.email}
                   onBlur={handleBlur}
                   onChange={handleChange}
                   touched={touched.email}
-                  helperText="We will never share your email with anyone else."
                   invalid={errors.email}
                 />
               </InputGroup>
-              {errors.email && touched.email && <small>{errors.email}</small>}
+              {errors.email && touched.email && <small className="error-message">{errors.email}</small>}
             </FormGroup>
-            <FormGroup>
+            <FormGroup className="PasswordFormGroup">
               <InputGroup className="input-group-alternative mb-3">
                 <InputGroupAddon addonType="prepend">
                   <InputGroupText>
@@ -61,6 +61,7 @@ class RegisterForm extends React.Component {
                 </InputGroupAddon>
                 <Input
                   placeholder="Password"
+                  data-test="password"
                   type="password"
                   name="password"
                   value={values.password}
@@ -70,9 +71,9 @@ class RegisterForm extends React.Component {
                   invalid={errors.password}
                 />
               </InputGroup>
-              {errors.password && touched.password && <small>{errors.password}</small>}
+              {errors.password && touched.password && <small className="error-message">{errors.password}</small>}
             </FormGroup>
-            <FormGroup>
+            <FormGroup className="ConfirmPasswordFormGroup">
               <InputGroup className="input-group-alternative">
                 <InputGroupAddon addonType="prepend">
                   <InputGroupText>
@@ -83,6 +84,7 @@ class RegisterForm extends React.Component {
                   placeholder="Re-type password"
                   type="password"
                   name="confirmPassword"
+                  data-test="confirmPassword"
                   value={values.confirmPassword}
                   onBlur={handleBlur}
                   onChange={handleChange}
@@ -90,7 +92,9 @@ class RegisterForm extends React.Component {
                   invalid={errors.confirmPassword}
                 />
               </InputGroup>
-              {errors.confirmPassword && touched.confirmPassword && <small>{errors.confirmPassword}</small>}
+              {errors.confirmPassword && touched.confirmPassword && (
+                <small className="error-message">{errors.confirmPassword}</small>
+              )}
             </FormGroup>
             <div className="text-muted font-italic">
               <small>
@@ -104,7 +108,7 @@ class RegisterForm extends React.Component {
                   <label className="custom-control-label" htmlFor="customCheckRegister">
                     <span className="text-muted">
                       I agree with the{' '}
-                      <a href="#pablo" onClick={(e) => e.preventDefault()}>
+                      <a href="/privacy-policy" onClick={(e) => e.preventDefault()}>
                         Privacy Policy
                       </a>
                     </span>

@@ -5,7 +5,7 @@ import { BrowserRouter, Route, Switch } from "react-router-dom";
 
 import "./assets/vendor/nucleo/css/nucleo.css";
 import "./assets/vendor/@fortawesome/fontawesome-free/css/all.min.css";
-import "./assets/scss/argon-dashboard-react.scss";
+import "./assets/scss/dashboard.scss";
 import AuthenticationPage from './views/AuthenticationPage';
 
 ReactDOM.render(
