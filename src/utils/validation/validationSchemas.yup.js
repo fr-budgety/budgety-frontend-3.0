@@ -12,7 +12,7 @@ export const SignupSchema = Yup.object().shape({
     .min(8, INPUT_ERRORS.wrongLenght)
     .max(16, INPUT_ERRORS.wrongLenght)
     .matches(/^(?=.*[a-z])(?=.*[A-Z])/, INPUT_ERRORS.passwordStrenghtLetters)
-    .matches(/^(?=.*[0-9])(?=.*[!@#\$%\^&\*])/, INPUT_ERRORS.passwordStrenghtNumbers)
+    .matches(/^(?=.*[0-9])(?=.*[!@#$%^&*])/, INPUT_ERRORS.passwordStrenghtNumbers)
     .required(INPUT_ERRORS.required),
 
   confirmPassword: Yup.string()

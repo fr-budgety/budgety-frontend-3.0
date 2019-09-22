@@ -9,11 +9,6 @@ describe('/auth/register', () => {
     cy.get('#WelcomeMessage').contains('Sign up')
   })
 
-  // Registration form
-  it('links to the privacy policy', () => {
-    cy.contains('Privacy Policy').should('have.attr', 'href', '/privacy-policy')
-  })
-
   it('requires an email of type email', () => {
     const emails = { wrongEmailOne: 'abc', wrongEmailTwo: 'abc@abc' }
 
@@ -117,7 +112,7 @@ describe('/auth/register', () => {
 
   })
 
-  it('gives no error if all conditions are met', () => {
+  it('gives no error if all conditions are met and succesfully sign up', () => {
     const credentials = {
       email: 'user@email.com',
       password: 'LampOn2!!',
@@ -127,15 +122,33 @@ describe('/auth/register', () => {
     // Type data inside form
     cy.get('[data-test=email]').type(credentials.email)
     cy.get('[data-test=password]').type(credentials.password)
-    cy.get('[data-test=confirmPassword]').type(credentials.confirmPassword)
-    cy.get('form').contains('Create account').click()
+    cy.get('[data-test=confirmPassword]').type(credentials.confirmPassword + '{enter}')
 
     // There should be no errors
     cy.get('.error-message').should('have.length', 0)
+
+    // Gets redirected to login page
+    cy.location('pathname').should('eq', '/auth/login')
+  })
+
+
+  it('gives error if user already exists', () => {
+    const credentials = {
+      email: 'user@email.com',
+      password: 'LampOn2!!',
+      confirmPassword: 'LampOn2!!'
+    }
+
+    // Type data inside form
+    cy.get('[data-test=email]').type(credentials.email)
+    cy.get('[data-test=password]').type(credentials.password)
+    cy.get('[data-test=confirmPassword]').type(credentials.confirmPassword + '{enter}')
+
+    // Receive danger response
+    cy.get('[data-test="messages"]').contains('The email address is already in use by another account.')
   })
 
 });
-
 /**
- * @todo: Signup with google, test api, privacy policy, password strength
+ * @todo: Signup with google, test api, privacy policy
  */
