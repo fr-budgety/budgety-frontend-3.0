@@ -6,6 +6,7 @@ import { Formik } from 'formik';
 
 import { Button, FormGroup, Form, Input, InputGroup, Row, Col } from 'reactstrap';
 import { SignupSchema } from '../../../utils/validation/validationSchemas.yup';
+import RegisterPasswordMeter from '../register-password-meter/RegisterPasswordMeter';
 
 class RegisterForm extends React.Component {
   /**
@@ -81,11 +82,7 @@ class RegisterForm extends React.Component {
                 <small className="error-message">{errors.confirmPassword}</small>
               )}
             </FormGroup>
-            <div className="text-muted font-italic">
-              <small>
-                password strength: <span className="text-success font-weight-700">strong</span>
-              </small>
-            </div>
+            <RegisterPasswordMeter password={values.password} />
             <Row className="my-4">
               <Col xs="12">
                 <div className="custom-control custom-control-alternative custom-checkbox">

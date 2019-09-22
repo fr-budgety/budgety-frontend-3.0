@@ -48,6 +48,59 @@ describe('/auth/register', () => {
     cy.get('.PasswordFormGroup').contains(INPUT_ERRORS.wrongLenght)
   })
 
+  it('requires a strong password', () => {
+    const passwords = {
+      pwdLowercase: 'password',
+      pwdUppercase: 'PASSWORD',
+      pwdSymbol: 'passworD!',
+      pwdNumber: 'passw0rD'
+    }
+    // Try a lowercase password
+    cy.get('[data-test=password]').type(passwords.pwdLowercase)
+    cy.get('form').contains('Create account').click()
+    cy.get('.PasswordFormGroup').contains(INPUT_ERRORS.passwordStrenghtLetters)
+
+    // Try an uppercase password
+    cy.get('[data-test=password]').clear().type(passwords.pwdUppercase)
+    cy.get('form').contains('Create account').click()
+    cy.get('.PasswordFormGroup').contains(INPUT_ERRORS.passwordStrenghtLetters)
+
+    // Try a password without a number
+    cy.get('[data-test=password]').clear().type(passwords.pwdSymbol)
+    cy.get('form').contains('Create account').click()
+    cy.get('.PasswordFormGroup').contains(INPUT_ERRORS.passwordStrenghtNumbers)
+
+    // Try a password without a symbol
+    cy.get('[data-test=password]').clear().type(passwords.pwdSymbol)
+    cy.get('form').contains('Create account').click()
+    cy.get('.PasswordFormGroup').contains(INPUT_ERRORS.passwordStrenghtNumbers)
+  })
+
+  it('changes the password meter based on the password strength', () => {
+    const passwords = {
+      strengthWeak: 'Lampone',
+      strengthFair: 'Lampone0',
+      strengthGood: 'Lampone01',
+      strengthStrong: 'Lampone01!!'
+    }
+    // Test weak password
+    cy.get('[data-test=password]').type(passwords.strengthWeak)
+    cy.get('[data-test=password-meter]').contains('Weak')
+
+    // Test fair password
+    cy.get('[data-test=password]').clear().type(passwords.strengthFair)
+    cy.get('[data-test=password-meter]').contains('Fair')
+
+    // Test good password
+    cy.get('[data-test=password]').clear().type(passwords.strengthGood)
+    cy.get('[data-test=password-meter]').contains('Good')
+
+    // Test strong password
+    cy.get('[data-test=password]').clear().type(passwords.strengthStrong)
+    cy.get('[data-test=password-meter]').contains('Strong')
+
+  })
+
   it('requires a confirmation password', () => {
     // Confirmation password is required
     cy.get('form').contains('Create account').click()

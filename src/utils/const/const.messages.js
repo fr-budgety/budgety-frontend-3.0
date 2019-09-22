@@ -6,4 +6,6 @@ export const INPUT_ERRORS = {
   notAnEmail: 'Insert a correct email',
   passwordMustMatch: "Password field's must match",
   wrongLenght: 'Password must be between 8 and 16 characters',
+  passwordStrenghtLetters: 'Use at least a lowercase and an uppercase letter',
+  passwordStrenghtNumbers: 'Use at least a symbol and a number',
 };
