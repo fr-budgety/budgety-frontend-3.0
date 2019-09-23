@@ -4,8 +4,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import zxcvbn from 'zxcvbn';
 
-class RegisterPasswordMeter extends React.Component {
-  passwordStrengthLabel = ({ score }) => {
+const RegisterPasswordMeter = ({ password }) => {
+  const passwordStrengthLabel = ({ score }) => {
     switch (score) {
       case 0:
         return { color: 'text-danger', value: 'Weak' };
@@ -21,23 +21,20 @@ class RegisterPasswordMeter extends React.Component {
         return { color: 'text-danger', value: 'Strong' };
     }
   };
+  // Get result from typed password
+  const testedResult = zxcvbn(password);
 
-  render() {
-    // Get result from typed password
-    const testedResult = zxcvbn(this.props.password);
+  // Get labelled result
+  const humanizedResult = passwordStrengthLabel(testedResult);
 
-    // Get labelled result
-    const humanizedResult = this.passwordStrengthLabel(testedResult);
-
-    return (
-      <div className="text-muted font-italic" data-test="password-meter">
-        <small>
-          password strength: <span className={`font-weight-700 ${humanizedResult.color}`}>{humanizedResult.value}</span>
-        </small>
-      </div>
-    );
-  }
-}
+  return (
+    <div className="text-muted font-italic" data-test="password-meter">
+      <small>
+        password strength: <span className={`font-weight-700 ${humanizedResult.color}`}>{humanizedResult.value}</span>
+      </small>
+    </div>
+  );
+};
 
 RegisterPasswordMeter.propTypes = {
   password: PropTypes.string,
