@@ -5,7 +5,6 @@ import PropTypes from 'prop-types';
 
 import { Formik } from 'formik';
 import { withRouter } from 'react-router';
-import app from '../../../config/base';
 
 import { Button, FormGroup, Form, Input, InputGroup, Alert } from 'reactstrap';
 import { SignupSchema } from '../../../utils/validation/validationSchemas.yup';
@@ -21,7 +20,7 @@ const RegisterForm = ({ ...props }) => {
    */
   const handleSignUp = async ({ email, password }) => {
     try {
-      await app.auth().createUserWithEmailAndPassword(email, password);
+      //await app.auth().createUserWithEmailAndPassword(email, password);
       props.history.push('/auth/login');
       setMessage(null);
     } catch (error) {
