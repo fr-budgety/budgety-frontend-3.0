@@ -19,11 +19,9 @@ import rootReducer from './redux/reducers/rootReducer';
 
 // Create redux store
 const store = createStore(rootReducer, composeWithDevTools(
-  compose(
-    reactReduxFirebase(fbConfig),
-    reduxFirestore(fbConfig),
-    applyMiddleware(thunk.withExtraArgument({ getFirebase, getFirestore }))
-  )
+  applyMiddleware(thunk.withExtraArgument({ getFirebase, getFirestore })),
+  reactReduxFirebase(fbConfig, { attachAuthIsReady: true }),
+  reduxFirestore(fbConfig),
 ));
 
 

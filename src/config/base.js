@@ -1,6 +1,7 @@
-import firebase from 'firebase/app';
+import firebase from 'firebase';
 import 'firebase/firestore';
 import 'firebase/auth';
+import 'firebase/app'
 
 // Replace this with your own config details
 var config = {

@@ -5,6 +5,8 @@ import PropTypes from 'prop-types';
 
 import { Formik } from 'formik';
 import { withRouter } from 'react-router';
+import { connect } from 'react-redux';
+import { signUp } from '../../../redux/actions/authActions';
 
 import { Button, FormGroup, Form, Input, InputGroup, Alert } from 'reactstrap';
 import { SignupSchema } from '../../../utils/validation/validationSchemas.yup';
@@ -20,7 +22,7 @@ const RegisterForm = ({ ...props }) => {
    */
   const handleSignUp = async ({ email, password }) => {
     try {
-      //await app.auth().createUserWithEmailAndPassword(email, password);
+      await props.signUp(email, password);
       props.history.push('/auth/login');
       setMessage(null);
     } catch (error) {
@@ -107,6 +109,19 @@ const RegisterForm = ({ ...props }) => {
 
 RegisterForm.propTypes = {
   history: PropTypes.object.isRequired,
+  signUp: PropTypes.func.isRequired,
 };
 
-export default withRouter(RegisterForm);
+const mapStateToProps = (state) => ({ auth: state.firebase.auth });
+const mapDispatchToProps = (dispatch) => {
+  return {
+    signUp: (email, password) => dispatch(signUp(email, password)),
+  };
+};
+
+export default withRouter(
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )(RegisterForm)
+);
