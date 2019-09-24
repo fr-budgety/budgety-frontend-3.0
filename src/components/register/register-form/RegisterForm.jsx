@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 import { Formik } from 'formik';
 import { withRouter } from 'react-router';
 import { connect } from 'react-redux';
-import { signUp } from '../../../redux/actions/authActions';
+import { signUp, signUpWithGoogle } from '../../../redux/actions/authActions';
 
 import { Button, FormGroup, Form, Input, InputGroup, Alert } from 'reactstrap';
 import { SignupSchema } from '../../../utils/validation/validationSchemas.yup';
@@ -42,6 +42,7 @@ const RegisterForm = ({ ...props }) => {
     >
       {({ values, errors, touched, handleChange, handleBlur, handleSubmit, isSubmitting }) => (
         <Form role="form" onSubmit={handleSubmit} noValidate>
+          <button onClick={props.signUpWithGoogle}>google</button>
           <div className="text-center" data-test="messages">
             {message && <Alert color={type}>{message}</Alert>}
           </div>
@@ -116,6 +117,7 @@ const mapStateToProps = (state) => ({ auth: state.firebase.auth });
 const mapDispatchToProps = (dispatch) => {
   return {
     signUp: (email, password) => dispatch(signUp(email, password)),
+    signUpWithGoogle: () => dispatch(signUpWithGoogle()),
   };
 };
 
