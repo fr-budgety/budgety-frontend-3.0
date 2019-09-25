@@ -1,6 +1,6 @@
 /** @format */
 
-import React, { useState } from 'react';
+import React, { useState, FunctionComponent } from 'react';
 import PropTypes from 'prop-types';
 
 import { Formik } from 'formik';
@@ -10,21 +10,27 @@ import { signUp, signUpWithGoogle } from '../../../redux/actions/authActions';
 
 import { Button, FormGroup, Form, Input, InputGroup, Alert } from 'reactstrap';
 import { SignupSchema } from '../../../utils/validation/validationSchemas.yup';
+import { RouteComponentProps } from 'react-router-dom';
 import RegisterPasswordMeter from '../register-password-meter/RegisterPasswordMeter';
 
-const RegisterForm = ({ ...props }) => {
-  const [message, setMessage] = useState(null);
-  const [type, setType] = useState(null);
+interface RegisterFormProps extends RouteComponentProps<any> {
+  signUp: (email: string, password: string) => void;
+  signUpWithGoogle: () => void;
+}
+
+const RegisterForm: React.SFC<RegisterFormProps> = (props) => {
+  const [message, setMessage] = useState<string | undefined>(undefined);
+  const [type, setType] = useState<string | undefined>(undefined);
 
   /**
    * Async
    * @function handleSignup
    */
-  const handleSignUp = async ({ email, password }) => {
+  const handleSignUp = async ({ email, password }: { email: string; password: string }) => {
     try {
       await props.signUp(email, password);
       props.history.push('/auth/login');
-      setMessage(null);
+      setMessage(undefined);
     } catch (error) {
       setMessage(error.message);
       setType('danger');
