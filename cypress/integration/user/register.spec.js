@@ -6,7 +6,7 @@ describe('/auth/register', () => {
   })
 
   it('greets with signup message', () => {
-    cy.get('#WelcomeMessage').contains('Sign up')
+    cy.get('#SignUpMessage').contains('sign up')
   })
 
   it('requires an email of type email', () => {
@@ -112,7 +112,7 @@ describe('/auth/register', () => {
 
   })
 
-  it('gives no error if all conditions are met and succesfully sign up', () => {
+  it('gives no error if all conditions are met', () => {
     const credentials = {
       email: 'user@email.com',
       password: 'LampOn2!!',
@@ -126,11 +126,7 @@ describe('/auth/register', () => {
 
     // There should be no errors
     cy.get('.error-message').should('have.length', 0)
-
-    // Gets redirected to login page
-    cy.location('pathname').should('eq', '/auth/login')
   })
-
 
   it('gives error if user already exists', () => {
     const credentials = {

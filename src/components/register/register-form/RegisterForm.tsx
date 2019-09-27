@@ -1,6 +1,6 @@
 /** @format */
 
-import React, { useState, FunctionComponent } from 'react';
+import React, { useState } from 'react';
 import { RegisterFormState } from '../../../redux/store/types';
 
 import { Formik } from 'formik';
@@ -17,6 +17,7 @@ import RegisterPasswordMeter from '../register-password-meter/RegisterPasswordMe
 interface RegisterFormProps extends RouteComponentProps<any> {
   signUp: (email: string, password: string) => void;
   signUpWithGoogle: () => void;
+  auth: RegisterFormState;
 }
 
 const RegisterForm: React.SFC<RegisterFormProps> = (props) => {
@@ -49,9 +50,13 @@ const RegisterForm: React.SFC<RegisterFormProps> = (props) => {
     >
       {({ values, errors, touched, handleChange, handleBlur, handleSubmit, isSubmitting }) => (
         <Form role="form" onSubmit={handleSubmit} noValidate>
-          <button onClick={props.signUpWithGoogle}>google</button>
           <div className="text-center" data-test="messages">
             {message && <Alert color={type}>{message}</Alert>}
+            {props.auth.authError && (
+              <Alert data-test="messages" color="danger">
+                {props.auth.authError}
+              </Alert>
+            )}
           </div>
           <FormGroup className="EmailFormGroup">
             <InputGroup>
@@ -115,7 +120,7 @@ const RegisterForm: React.SFC<RegisterFormProps> = (props) => {
   );
 };
 
-const mapStateToProps = (state: RegisterFormState) => ({ auth: state.firebase.auth });
+const mapStateToProps = (state: RegisterFormState) => ({ firebase: state.firebase.auth, auth: state.auth });
 const mapDispatchToProps = (dispatch: ThunkDispatch<RegisterFormState, undefined, any>) => {
   return {
     signUp: (email: string, password: string) => dispatch(signUp(email, password)),
