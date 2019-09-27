@@ -24,8 +24,6 @@ const store = createStore(rootReducer, composeWithDevTools(
   reduxFirestore(fbConfig),
 ));
 
-
-
 ReactDOM.render(
   <Provider store={store}>
     <Router>

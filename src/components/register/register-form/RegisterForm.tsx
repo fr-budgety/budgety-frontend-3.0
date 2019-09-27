@@ -1,12 +1,13 @@
 /** @format */
 
 import React, { useState, FunctionComponent } from 'react';
-import PropTypes from 'prop-types';
+import { RegisterFormState } from '../../../redux/store/types';
 
 import { Formik } from 'formik';
 import { withRouter } from 'react-router';
 import { connect } from 'react-redux';
 import { signUp, signUpWithGoogle } from '../../../redux/actions/authActions';
+import { ThunkDispatch } from 'redux-thunk';
 
 import { Button, FormGroup, Form, Input, InputGroup, Alert } from 'reactstrap';
 import { SignupSchema } from '../../../utils/validation/validationSchemas.yup';
@@ -63,7 +64,7 @@ const RegisterForm: React.SFC<RegisterFormProps> = (props) => {
                 onBlur={handleBlur}
                 onChange={handleChange}
                 touched={touched.email}
-                invalid={touched.email && errors.email}
+                invalid={touched.email && errors.email ? true : false}
               />
             </InputGroup>
             {errors.email && touched.email && <small className="error-message">{errors.email}</small>}
@@ -79,7 +80,7 @@ const RegisterForm: React.SFC<RegisterFormProps> = (props) => {
                 value={values.password}
                 onChange={handleChange}
                 touched={touched.password}
-                invalid={touched.password && errors.password}
+                invalid={touched.password && errors.password ? true : false}
               />
             </InputGroup>
             {errors.password && touched.password && <small className="error-message">{errors.password}</small>}
@@ -95,7 +96,7 @@ const RegisterForm: React.SFC<RegisterFormProps> = (props) => {
                 onBlur={handleBlur}
                 onChange={handleChange}
                 touched={touched.confirmPassword}
-                invalid={touched.confirmPassword && errors.confirmPassword}
+                invalid={touched.confirmPassword && errors.confirmPassword ? true : false}
               />
             </InputGroup>
             {errors.confirmPassword && touched.confirmPassword && (
@@ -114,15 +115,10 @@ const RegisterForm: React.SFC<RegisterFormProps> = (props) => {
   );
 };
 
-RegisterForm.propTypes = {
-  history: PropTypes.object.isRequired,
-  signUp: PropTypes.func.isRequired,
-};
-
-const mapStateToProps = (state) => ({ auth: state.firebase.auth });
-const mapDispatchToProps = (dispatch) => {
+const mapStateToProps = (state: RegisterFormState) => ({ auth: state.firebase.auth });
+const mapDispatchToProps = (dispatch: ThunkDispatch<RegisterFormState, undefined, any>) => {
   return {
-    signUp: (email, password) => dispatch(signUp(email, password)),
+    signUp: (email: string, password: string) => dispatch(signUp(email, password)),
     signUpWithGoogle: () => dispatch(signUpWithGoogle()),
   };
 };
