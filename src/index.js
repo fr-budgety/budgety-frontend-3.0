@@ -16,6 +16,7 @@ import "./assets/scss/dashboard.scss";
 
 import SignUpPage from './views/SignupPage';
 import rootReducer from './redux/reducers/rootReducer';
+import SignInPage from './views/SignInPage';
 
 // Create redux store
 const store = createStore(rootReducer, composeWithDevTools(
@@ -28,8 +29,9 @@ ReactDOM.render(
   <Provider store={store}>
     <Router>
       <Switch>
-        <Route path="/auth/register" render={props => <SignUpPage {...props} />} />
-        <Route path="/" render={props => <SignUpPage {...props} />} />
+        <Route exact path="/auth/login" render={props => <SignInPage {...props} />} />
+        <Route exact path="/auth/register" render={props => <SignUpPage {...props} />} />
+        <Route exact path="/" render={props => <SignInPage {...props} />} />
       </Switch>
     </Router>
   </Provider>,
