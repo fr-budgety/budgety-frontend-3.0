@@ -14,7 +14,13 @@ interface OAuthSignInProps {
 const OAuthSignIn: React.SFC<OAuthSignInProps> = ({ signInWithGoogle }) => {
   return (
     <div className="text-center">
-      <Button className="btn-neutral btn-icon" color="default" href="#" onClick={signInWithGoogle}>
+      <Button
+        className="btn-neutral btn-icon"
+        color="default"
+        href="#"
+        onClick={signInWithGoogle}
+        data-test="google-oauth"
+      >
         <span className="btn-inner--icon">
           <img alt="..." src={require('assets/img/icons/common/google.svg')} />
         </span>

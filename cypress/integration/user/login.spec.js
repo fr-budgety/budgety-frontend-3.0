@@ -1,3 +1,5 @@
+import { INPUT_ERRORS } from '../../../src/utils/const/const.messages'
+
 describe('/auth/login', () => {
   beforeEach(() => {
     cy.visit('/auth/login')
@@ -17,19 +19,39 @@ describe('/auth/login', () => {
     cy.url().should('include', '/auth/register')
   })
 
-  it.skip('gives error if the email has not a correct format', () => {
+  it('shows Google OAuth button', () => {
+    cy.get('[data-test="google-oauth"]')
   })
 
-  it.skip('redirects to the dashboard page if the login is correct', () => {
+
+  it('gives error if the email has not a correct format', () => {
+    const emails = { wrongEmailOne: 'abc', wrongEmailTwo: 'abc@abc' }
+
+    // email is required
+    cy.get('form').contains('Sign in').click()
+    cy.get('.EmailFormGroup').contains(INPUT_ERRORS.required)
+
+    // email must be an email
+    cy.get('[data-test=email]').type(emails.wrongEmailOne)
+    cy.get('form').contains('Sign in').click()
+    cy.get('.EmailFormGroup').contains(INPUT_ERRORS.notAnEmail)
+
+    // email must be an email
+    cy.get('[data-test=email]').type(emails.wrongEmailTwo)
+    cy.get('form').contains('Sign in').click()
+    cy.get('.EmailFormGroup').contains(INPUT_ERRORS.notAnEmail)
   })
 
-  it.skip('redirects to the dashboard page if user already a session cookie', () => {
+  it('redirects to the dashboard page if the login is correct', () => {
   })
 
-  it.skip('gives error if username is incorrect', () => {
+  it('redirects to the dashboard page if user already a session cookie', () => {
   })
 
-  it.skip('gives error if password is incorrect', () => {
+  it('gives error if username is incorrect', () => {
+  })
+
+  it('gives error if password is incorrect', () => {
   })
 
 });

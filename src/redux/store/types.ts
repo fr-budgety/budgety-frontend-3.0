@@ -5,3 +5,9 @@ export interface RegisterFormState {
   authError: string;
   auth: any;
 }
+
+export interface LoginFormState {
+  firebase: any;
+  authError: string;
+  auth: any;
+}

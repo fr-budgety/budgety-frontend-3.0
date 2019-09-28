@@ -21,3 +21,14 @@ export const SignupSchema = Yup.object().shape({
       return this.parent.password === value;
     }),
 });
+
+/**
+ * Validation Schema for Sign In Form
+ */
+export const SigninSchema = Yup.object().shape({
+  email: Yup.string()
+    .email(INPUT_ERRORS.notAnEmail)
+    .required(INPUT_ERRORS.required),
+  password: Yup.string()
+    .required(INPUT_ERRORS.required),
+});
