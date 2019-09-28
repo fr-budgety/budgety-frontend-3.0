@@ -4,17 +4,17 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { ThunkDispatch } from 'redux-thunk';
 
-import { signUpWithGoogle } from '../../../redux/actions/authActions';
+import { signInWithGoogle } from '../../../redux/actions/authActions';
 
 import { Button } from 'reactstrap';
 
-interface RegisterAltProps {
-  signUpWithGoogle: (event: React.MouseEvent<any, MouseEvent>) => void;
+interface OAuthSignInProps {
+  signInWithGoogle: (event: React.MouseEvent<any, MouseEvent>) => void;
 }
-const RegisterAlt: React.SFC<RegisterAltProps> = ({ signUpWithGoogle }) => {
+const OAuthSignIn: React.SFC<OAuthSignInProps> = ({ signInWithGoogle }) => {
   return (
     <div className="text-center">
-      <Button className="btn-neutral btn-icon" color="default" href="#" onClick={signUpWithGoogle}>
+      <Button className="btn-neutral btn-icon" color="default" href="#" onClick={signInWithGoogle}>
         <span className="btn-inner--icon">
           <img alt="..." src={require('assets/img/icons/common/google.svg')} />
         </span>
@@ -25,11 +25,11 @@ const RegisterAlt: React.SFC<RegisterAltProps> = ({ signUpWithGoogle }) => {
 };
 const mapDispatchToProps = (dispatch: ThunkDispatch<undefined, undefined, any>) => {
   return {
-    signUpWithGoogle: () => dispatch(signUpWithGoogle()),
+    signInWithGoogle: () => dispatch(signInWithGoogle()),
   };
 };
 
 export default connect(
   null,
   mapDispatchToProps
-)(RegisterAlt);
+)(OAuthSignIn);

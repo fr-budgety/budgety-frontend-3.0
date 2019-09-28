@@ -1,6 +1,7 @@
 /** @format */
 
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 import { CardHeader, CardBody } from 'reactstrap';
 
@@ -15,6 +16,9 @@ const LoginModule: React.SFC = () => {
       <CardBody className="px-lg-5 py-lg-5">
         <div id="SignInMessage" className="text-center text-muted mb-4">
           <small>Or sign in with credentials</small>
+          <Link data-test="login-link" to="/auth/register">
+            <small>I don't have an account</small>
+          </Link>
         </div>
       </CardBody>
     </>

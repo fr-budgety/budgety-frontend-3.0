@@ -1,22 +1,22 @@
 /** @format */
 
 import React, { useState } from 'react';
-import { RegisterFormState } from '../../../redux/store/types';
+import { RegisterFormState } from '../../../../redux/store/types';
 
 import { Formik } from 'formik';
 import { withRouter } from 'react-router';
 import { connect } from 'react-redux';
-import { signUp, signUpWithGoogle } from '../../../redux/actions/authActions';
 import { ThunkDispatch } from 'redux-thunk';
 
+import { signUp } from '../../../../redux/actions/authActions';
+
 import { Button, FormGroup, Form, Input, InputGroup, Alert } from 'reactstrap';
-import { SignupSchema } from '../../../utils/validation/validationSchemas.yup';
+import { SignupSchema } from '../../../../utils/validation/validationSchemas.yup';
 import { RouteComponentProps } from 'react-router-dom';
 import RegisterPasswordMeter from '../register-password-meter/RegisterPasswordMeter';
 
 interface RegisterFormProps extends RouteComponentProps<any> {
   signUp: (email: string, password: string) => void;
-  signUpWithGoogle: () => void;
   auth: RegisterFormState;
 }
 
@@ -124,7 +124,6 @@ const mapStateToProps = (state: RegisterFormState) => ({ firebase: state.firebas
 const mapDispatchToProps = (dispatch: ThunkDispatch<RegisterFormState, undefined, any>) => {
   return {
     signUp: (email: string, password: string) => dispatch(signUp(email, password)),
-    signUpWithGoogle: () => dispatch(signUpWithGoogle()),
   };
 };
 

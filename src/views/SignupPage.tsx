@@ -1,7 +1,7 @@
 /** @format */
 
 import React, { SFC } from 'react';
-import RegisterModule from '../components/register/RegisterModule';
+import RegisterModule from '../components/authentication/register/RegisterModule';
 import { Container, Col, Row, Card } from 'reactstrap';
 import CenteredBlankLayout from '../layouts/CenteredBlankLayout';
 

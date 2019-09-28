@@ -33,9 +33,9 @@ export const signUp = (email, password) => async (dispatch, getState, { getFireb
 }
 
 /**
- * @function signUpWithGoogle - Login with google provider
+ * @function signInWithGoogle - Login with google provider
  */
-export const signUpWithGoogle = () => async (dispatch, getState, { getFirebase, getFirestore }) => {
+export const signInWithGoogle = () => async (dispatch, getState, { getFirebase, getFirestore }) => {
   const firebase = getFirebase();
   const provider = new firebase.auth.GoogleAuthProvider();
   try {
