@@ -97,7 +97,7 @@ class AdminNavbar extends React.Component {
                     <span>Support</span>
                   </DropdownItem>
                   <DropdownItem divider />
-                  <DropdownItem href="#pablo" onClick={e => e.preventDefault()}>
+                  <DropdownItem href="#" onClick={e => e.preventDefault()}>
                     <i className="ni ni-user-run" />
                     <span>Logout</span>
                   </DropdownItem>

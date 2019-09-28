@@ -14,7 +14,7 @@ import "./assets/vendor/nucleo/css/nucleo.css";
 import "./assets/vendor/@fortawesome/fontawesome-free/css/all.min.css";
 import "./assets/scss/dashboard.scss";
 
-import AuthenticationPage from './views/AuthenticationPage';
+import SignUpPage from './views/SignupPage';
 import rootReducer from './redux/reducers/rootReducer';
 
 // Create redux store
@@ -28,8 +28,8 @@ ReactDOM.render(
   <Provider store={store}>
     <Router>
       <Switch>
-        <Route path="/auth/register" render={props => <AuthenticationPage {...props} />} />
-        <Route path="/" render={props => <AuthenticationPage {...props} />} />
+        <Route path="/auth/register" render={props => <SignUpPage {...props} />} />
+        <Route path="/" render={props => <SignUpPage {...props} />} />
       </Switch>
     </Router>
   </Provider>,

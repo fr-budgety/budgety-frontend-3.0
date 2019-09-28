@@ -1,14 +1,14 @@
 /** @format */
 
-import React from 'react';
+import React, { SFC } from 'react';
 import RegisterModule from '../components/register/RegisterModule';
 import { Container, Col, Row, Card } from 'reactstrap';
 import CenteredBlankLayout from '../layouts/CenteredBlankLayout';
 
-const AuthenticationPage = () => {
+const SignUpPage: SFC = () => {
   return (
     <CenteredBlankLayout>
-      <div className="AuthenticationPage">
+      <div className="SignUpPage">
         <Container>
           <Row className="justify-content-center">
             <Col lg="6" md="8">
@@ -23,4 +23,4 @@ const AuthenticationPage = () => {
   );
 };
 
-export default AuthenticationPage;
+export default SignUpPage;

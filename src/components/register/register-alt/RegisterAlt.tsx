@@ -14,7 +14,7 @@ interface RegisterAltProps {
 const RegisterAlt: React.SFC<RegisterAltProps> = ({ signUpWithGoogle }) => {
   return (
     <div className="text-center">
-      <Button className="btn-neutral btn-icon" color="default" href="#pablo" onClick={signUpWithGoogle}>
+      <Button className="btn-neutral btn-icon" color="default" href="#" onClick={signUpWithGoogle}>
         <span className="btn-inner--icon">
           <img alt="..." src={require('assets/img/icons/common/google.svg')} />
         </span>
