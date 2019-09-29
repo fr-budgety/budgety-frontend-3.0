@@ -31,7 +31,6 @@ const RegisterForm: React.SFC<RegisterFormProps> = (props) => {
   const handleSignUp = async ({ email, password }: { email: string; password: string }) => {
     try {
       await props.signUp(email, password);
-      props.history.push('/auth/login');
       setMessage(undefined);
     } catch (error) {
       setMessage(error.message);

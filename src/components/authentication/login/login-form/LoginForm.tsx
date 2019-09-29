@@ -1,7 +1,7 @@
 /** @format */
 /** @format */
 
-import React from 'react';
+import React, { useState } from 'react';
 
 import { Formik } from 'formik';
 import { withRouter } from 'react-router';
@@ -22,7 +22,10 @@ interface LoginFormProps extends RouteComponentProps<any> {
   auth: LoginFormState;
 }
 
-const LoginForm: React.FC<LoginFormProps> = ({ className, signIn, history, signOut }) => {
+const LoginForm: React.FC<LoginFormProps> = ({ className, signIn, signOut, auth }) => {
+  const [message, setMessage] = useState<string | undefined>(undefined);
+  const [type, setType] = useState<string | undefined>(undefined);
+
   /**
    * Async
    * @function handleSignup
@@ -30,9 +33,10 @@ const LoginForm: React.FC<LoginFormProps> = ({ className, signIn, history, signO
   const handleSignIn = async ({ email, password }: { email: string; password: string }) => {
     try {
       await signIn(email, password);
-      history.push('/user/dashboard');
+      setMessage(undefined);
     } catch (error) {
-      console.log(error);
+      setMessage(error.message);
+      setType('danger');
     }
   };
 
@@ -62,6 +66,14 @@ const LoginForm: React.FC<LoginFormProps> = ({ className, signIn, history, signO
       >
         {({ values, errors, touched, handleChange, handleBlur, handleSubmit, isSubmitting }) => (
           <Form role="form" onSubmit={handleSubmit} noValidate className={className}>
+            <div className="text-center" data-test="messages">
+              {message && <Alert color={type}>{message}</Alert>}
+              {auth.authError && (
+                <Alert data-test="messages" color="danger">
+                  {auth.authError}
+                </Alert>
+              )}
+            </div>
             <FormGroup className="EmailFormGroup">
               <InputGroup>
                 <Input

@@ -1,15 +1,17 @@
 import { LOGIN_ERROR, LOGIN_SUCCESS, SIGNUP_SUCCESS, SIGNUP_ERROR } from '../actionTypes'
+import history from './history'
 
 /**
  * @function signIn - Get username, password, as string and dispatch login actions
  * @param {string} email
  * @param {string} password
  */
-export const signIn = (email, password) => async (dispatch, getState, { getFirebase, getFirestore }) => {
+export const signIn = (email, password) => async (dispatch, getState, { getFirebase }) => {
   const firebase = getFirebase();
   try {
     await firebase.auth().signInWithEmailAndPassword(email, password);
-    dispatch({ type: LOGIN_SUCCESS })
+    await dispatch({ type: LOGIN_SUCCESS })
+    history.push('/user/dashboard')
   } catch (err) {
     dispatch({ type: LOGIN_ERROR, err })
   }
@@ -21,10 +23,9 @@ export const signIn = (email, password) => async (dispatch, getState, { getFireb
 export const signOut = () => async (dispatch, getState, { getFirebase, getFirestore }) => {
   const firebase = getFirebase();
   try {
-    console.log('signed out')
     await firebase.auth().signOut();
   } catch (err) {
-    console.log(err)
+    throw (err)
   }
 }
 
@@ -40,6 +41,7 @@ export const signUp = (email, password) => async (dispatch, getState, { getFireb
     const resp = await firebase.auth().createUserWithEmailAndPassword(email, password)
     await firestore.collection('users').doc(resp.user.uid).set({ email })
     dispatch({ type: SIGNUP_SUCCESS })
+    history.push('/auth/login')
   } catch (err) {
     dispatch({ type: SIGNUP_ERROR, err })
   }

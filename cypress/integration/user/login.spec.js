@@ -42,16 +42,42 @@ describe('/auth/login', () => {
     cy.get('.EmailFormGroup').contains(INPUT_ERRORS.notAnEmail)
   })
 
+  it('it gets no redirected if login failed', () => {
+    const credentials = {
+      email: 'user@email.com',
+      password: 'wrongPassword',
+    }
+
+    // Type data inside form
+    cy.get('[data-test=email]').type(credentials.email)
+    cy.get('[data-test=password]').type(credentials.password + '{enter}')
+    // The user is not redirected
+    cy.url().should('not.include', '/user/dashboard')
+  })
+
   it('redirects to the dashboard page if the login is correct', () => {
+    const credentials = {
+      email: 'info@filipporivolta.it',
+      password: 'Lampone01!',
+    }
+    // Type data inside form
+    cy.get('[data-test=email]').type(credentials.email)
+    cy.get('[data-test=password]').type(credentials.password + '{enter}')
+    // The user is not redirected
+    cy.url().should('include', '/user/dashboard')
+  })
+
+  it.only('gives error if username or password is incorrect', () => {
+    const credentials = {
+      email: 'info@filipporivolta.it',
+      password: 'wrong',
+    }
+    // Type data inside form
+    cy.get('[data-test=email]').type(credentials.email)
+    cy.get('[data-test=password]').type(credentials.password + '{enter}')
+    cy.get('[data-test="messages"]').contains('Login failed')
   })
 
   it('redirects to the dashboard page if user already a session cookie', () => {
   })
-
-  it('gives error if username is incorrect', () => {
-  })
-
-  it('gives error if password is incorrect', () => {
-  })
-
 });
