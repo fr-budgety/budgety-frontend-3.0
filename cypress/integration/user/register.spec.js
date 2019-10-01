@@ -144,10 +144,7 @@ describe('/auth/register', () => {
     cy.get('[data-test="messages"]').contains('The email address is already in use by another account.')
   })
 
-  it.skip('it gets no redirected if signup failed', () => {
-  })
-
 });
 /**
- * @todo: Signup with google, test api, privacy policy
+ * @todo: privacy policy
  */

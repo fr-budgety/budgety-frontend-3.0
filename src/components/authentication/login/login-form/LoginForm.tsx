@@ -55,7 +55,6 @@ const LoginForm: React.FC<LoginFormProps> = ({ className, signIn, signOut, auth 
   return (
     <>
       <button onClick={handleSignOut}>Signout</button>
-
       <Formik
         initialValues={{ email: '', password: '', confirmPassword: '' }}
         validationSchema={SigninSchema}

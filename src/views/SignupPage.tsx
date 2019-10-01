@@ -3,11 +3,11 @@
 import React, { SFC } from 'react';
 import RegisterModule from '../components/authentication/register/RegisterModule';
 import { Container, Col, Row, Card } from 'reactstrap';
-import CenteredBlankLayout from '../layouts/CenteredBlankLayout';
+import AuthenticationLayout from '../layouts/AuthenticationLayout';
 
 const SignUpPage: SFC = () => {
   return (
-    <CenteredBlankLayout>
+    <AuthenticationLayout>
       <div className="SignUpPage">
         <Container>
           <Row className="justify-content-center">
@@ -19,7 +19,7 @@ const SignUpPage: SFC = () => {
           </Row>
         </Container>
       </div>
-    </CenteredBlankLayout>
+    </AuthenticationLayout>
   );
 };
 

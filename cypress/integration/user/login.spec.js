@@ -67,7 +67,7 @@ describe('/auth/login', () => {
     cy.url().should('include', '/user/dashboard')
   })
 
-  it.only('gives error if username or password is incorrect', () => {
+  it('gives error if username or password is incorrect', () => {
     const credentials = {
       email: 'info@filipporivolta.it',
       password: 'wrong',
@@ -78,6 +78,4 @@ describe('/auth/login', () => {
     cy.get('[data-test="messages"]').contains('Login failed')
   })
 
-  it('redirects to the dashboard page if user already a session cookie', () => {
-  })
 });
