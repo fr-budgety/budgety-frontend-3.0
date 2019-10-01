@@ -17,6 +17,7 @@ import "./assets/scss/dashboard.scss";
 import SignUpPage from './views/SignupPage';
 import rootReducer from './redux/reducers/rootReducer';
 import SignInPage from './views/SignInPage';
+import MainPage from './views/MainPage';
 //import PrivateRoute from './components/authentication/private-route/PrivateRoute'
 
 // Create redux store
@@ -32,7 +33,8 @@ ReactDOM.render(
       <Switch>
         <Route exact path="/auth/login" component={SignInPage} />
         <Route exact path="/auth/register" component={SignUpPage} />
-        <Route exact path='/user/dashboard' component={SignUpPage} />
+        <Route exact path='/user/dashboard' component={MainPage} />
+        <Route exact path='/user/expenses' component={MainPage} />
         <Route exact path="/" render={props => <SignInPage {...props} />} />
       </Switch>
     </Router>
