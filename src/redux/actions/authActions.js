@@ -24,6 +24,7 @@ export const signOut = () => async (dispatch, getState, { getFirebase, getFirest
   const firebase = getFirebase();
   try {
     await firebase.auth().signOut();
+    history.push('/auth/login')
   } catch (err) {
     throw (err)
   }

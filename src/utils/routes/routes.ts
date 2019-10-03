@@ -25,5 +25,11 @@ const routes = [
     icon: 'ni ni-pin-3 text-orange',
     layout: '/user',
   },
+  {
+    path: '/settings',
+    name: 'Settings',
+    icon: 'ni ni-pin-3 text-orange',
+    layout: '/user',
+  },
 ];
 export default routes;

@@ -9,9 +9,10 @@ import routes from '../utils/routes/routes';
 
 interface DashboardLayoutProps {
   children?: any;
+  brandText?: string;
 }
 
-const DashboardLayout: React.FC<DashboardLayoutProps> = ({ children }) => {
+const DashboardLayout: React.FC<DashboardLayoutProps> = ({ children, brandText }) => {
   return (
     <>
       <Sidebar
@@ -24,7 +25,7 @@ const DashboardLayout: React.FC<DashboardLayoutProps> = ({ children }) => {
       />
       <div className="main-content">
         <div className="header bg-gradient-default pb-8 pt-5 pt-md-8">
-          <DashboardNavbar brandText="brand text" />
+          <DashboardNavbar brandText={brandText ? brandText : 'Loading'} />
           {children}
         </div>
       </div>

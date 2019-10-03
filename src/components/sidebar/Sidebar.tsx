@@ -5,15 +5,18 @@ import { NavLink as NavLinkRRD, Link } from 'react-router-dom';
 
 import { Collapse, NavbarBrand, Navbar, NavItem, NavLink, Nav, Container } from 'reactstrap';
 
-interface RoutesType {
-  path: string;
-  name: string;
-  icon: string;
-  layout: string;
+import { RoutesType } from '../../models/IAppProps';
+
+interface LogoType {
+  imgAlt: string;
+  imgSrc: string;
+  innerLink?: string;
+  outterLink?: string;
 }
 
 interface SidebarRoutesProps {
   routes?: RoutesType[];
+  logo?: LogoType;
 }
 
 const Sidebar: React.FC<SidebarRoutesProps> = (props) => {
@@ -25,7 +28,7 @@ const Sidebar: React.FC<SidebarRoutesProps> = (props) => {
   };
 
   // creates the links that appear in the left menu / Sidebar
-  const createLinks = (routes: object[]) => {
+  const createLinks = (routes: RoutesType[]) => {
     return routes.map((prop: RoutesType, key: number) => {
       return (
         <NavItem key={key}>
@@ -64,7 +67,7 @@ const Sidebar: React.FC<SidebarRoutesProps> = (props) => {
         {/* Collapse */}
         <Collapse navbar isOpen={collapseOpen}>
           {/* Navigation */}
-          <Nav navbar>{createLinks(routes)}</Nav>
+          <Nav navbar>{routes && createLinks(routes)}</Nav>
           {/* Divider */}
           <hr className="my-3" />
           {/* Heading */}
@@ -83,25 +86,5 @@ const Sidebar: React.FC<SidebarRoutesProps> = (props) => {
     </Navbar>
   );
 };
-
-Sidebar.defaultProps = {
-  routes: [{}],
-};
-
-/* Sidebar.propTypes = {
-  routes: PropTypes.arrayOf(PropTypes.object),
-  logo: PropTypes.shape({
-    // innerLink is for links that will direct the user within the app
-    // it will be rendered as <Link to="...">...</Link> tag
-    innerLink: PropTypes.string,
-    // outterLink is for links that will direct the user outside the app
-    // it will be rendered as simple <a href="...">...</a> tag
-    outterLink: PropTypes.string,
-    // the image src of the logo
-    imgSrc: PropTypes.string.isRequired,
-    // the alt for the img
-    imgAlt: PropTypes.string.isRequired,
-  }),
-}; */
 
 export default Sidebar;

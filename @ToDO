@@ -1,4 +1,2 @@
-- Adding hooks instead of classess
-- Adding tsx to all
 - Navbar based on current user
-- Pages names
+- History push doesn't rerender
