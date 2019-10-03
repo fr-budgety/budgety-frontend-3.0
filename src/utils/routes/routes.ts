@@ -10,25 +10,25 @@ const routes = [
   {
     path: '/expenses',
     name: 'Expenses',
-    icon: 'ni ni-single-02 text-yellow',
+    icon: 'ni ni-money-coins text-yellow',
     layout: '/user',
   },
   {
     path: '/categories',
     name: 'Categories',
-    icon: 'ni ni-planet text-blue',
+    icon: 'ni ni-archive-2 text-blue',
     layout: '/user',
   },
   {
     path: '/budgets',
     name: 'Budgets',
-    icon: 'ni ni-pin-3 text-orange',
+    icon: 'ni ni-ui-04 text-orange',
     layout: '/user',
   },
   {
     path: '/settings',
     name: 'Settings',
-    icon: 'ni ni-pin-3 text-orange',
+    icon: 'ni ni-settings text-teal',
     layout: '/user',
   },
 ];

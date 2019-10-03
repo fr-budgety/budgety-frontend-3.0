@@ -18,11 +18,10 @@ import { SigninSchema } from '../../../../utils/validation/validationSchemas.yup
 interface LoginFormProps extends RouteComponentProps<any> {
   className?: string;
   signIn: (email: string, password: string) => void;
-  signOut: () => void;
   auth: LoginFormState;
 }
 
-const LoginForm: React.FC<LoginFormProps> = ({ className, signIn, signOut, auth }) => {
+const LoginForm: React.FC<LoginFormProps> = ({ className, signIn, auth }) => {
   const [message, setMessage] = useState<string | undefined>(undefined);
   const [type, setType] = useState<string | undefined>(undefined);
 
@@ -40,21 +39,8 @@ const LoginForm: React.FC<LoginFormProps> = ({ className, signIn, signOut, auth 
     }
   };
 
-  /**
-   * Async
-   * @function handleSignup
-   */
-  const handleSignOut = async () => {
-    try {
-      await signOut();
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
   return (
     <>
-      <button onClick={handleSignOut}>Signout</button>
       <Formik
         initialValues={{ email: '', password: '', confirmPassword: '' }}
         validationSchema={SigninSchema}
@@ -119,7 +105,6 @@ const LoginForm: React.FC<LoginFormProps> = ({ className, signIn, signOut, auth 
 const mapDispatchToProps = (dispatch: ThunkDispatch<LoginFormState, undefined, any>) => {
   return {
     signIn: (email: string, password: string) => dispatch(signIn(email, password)),
-    signOut: () => dispatch(signOut()),
   };
 };
 const mapStateToProps = (state: LoginFormState) => ({ firebase: state.firebase.auth, auth: state.auth });
