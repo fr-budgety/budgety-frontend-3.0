@@ -7,5 +7,5 @@
   "trailingComma": "es5",
   "jsxBracketSameLine": false,
   "arrowParens": "always",
-  "insertPragma": true
+  "insertPragma": false
 }

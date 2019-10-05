@@ -1,5 +1,3 @@
-/** @format */
-
 export interface RoutesType {
   path: string;
   name: string;
