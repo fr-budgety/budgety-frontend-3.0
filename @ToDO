@@ -1,2 +1,2 @@
-- Navbar based on current user
-- History push doesn't rerender
+- Private routes
+- App class to dispatch private routes
