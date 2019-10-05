@@ -2,6 +2,8 @@
 
 import React from 'react';
 
+import { Link } from 'react-router-dom';
+
 import { CardHeader, CardBody } from 'reactstrap';
 import RegisterForm from './register-form/RegisterForm';
 import OAuthSignIn from '../oAuth/OAuthSignIn';
@@ -20,6 +22,9 @@ const RegisterModule: React.SFC = () => {
           <small>Or sign up with credentials</small>
         </div>
         <RegisterForm />
+        <Link data-test="login-link" to="/" className="d-flex justify-content-center mt-4">
+          <small className="text-center">I already have an account</small>
+        </Link>
       </CardBody>
     </>
   );
