@@ -1,12 +1,11 @@
 import { LOGIN_ERROR, LOGIN_SUCCESS, SIGNUP_SUCCESS, SIGNUP_ERROR } from '../actionTypes'
-import history from './history'
 
 /**
  * @function signIn - Get username, password, as string and dispatch login actions
  * @param {string} email
  * @param {string} password
  */
-export const signIn = (email, password) => async (dispatch, getState, { getFirebase }) => {
+export const signIn = (email, password, history) => async (dispatch, getState, { getFirebase }) => {
   const firebase = getFirebase();
   try {
     await firebase.auth().signInWithEmailAndPassword(email, password);
@@ -20,11 +19,11 @@ export const signIn = (email, password) => async (dispatch, getState, { getFireb
 /**
  * @function signOut - Sign out
  */
-export const signOut = () => async (dispatch, getState, { getFirebase, getFirestore }) => {
+export const signOut = (history) => async (dispatch, getState, { getFirebase }) => {
   const firebase = getFirebase();
   try {
     await firebase.auth().signOut();
-    history.push('/auth/login')
+    history.push('/')
   } catch (err) {
     throw (err)
   }
@@ -35,14 +34,14 @@ export const signOut = () => async (dispatch, getState, { getFirebase, getFirest
  * @param {string} email
  * @param {string} password
  */
-export const signUp = (email, password) => async (dispatch, getState, { getFirebase, getFirestore }) => {
+export const signUp = (email, password, history) => async (dispatch, getState, { getFirebase, getFirestore }) => {
   const firebase = getFirebase();
   const firestore = getFirestore();
   try {
     const resp = await firebase.auth().createUserWithEmailAndPassword(email, password)
     await firestore.collection('users').doc(resp.user.uid).set({ email })
     dispatch({ type: SIGNUP_SUCCESS })
-    history.push('/auth/login')
+    history.push('/')
   } catch (err) {
     dispatch({ type: SIGNUP_ERROR, err })
   }
@@ -51,11 +50,12 @@ export const signUp = (email, password) => async (dispatch, getState, { getFireb
 /**
  * @function signInWithGoogle - Login with google provider
  */
-export const signInWithGoogle = () => async (dispatch, getState, { getFirebase, getFirestore }) => {
+export const signInWithGoogle = (history) => async (dispatch, getState, { getFirebase, getFirestore }) => {
   const firebase = getFirebase();
   const provider = new firebase.auth.GoogleAuthProvider();
   try {
     await firebase.auth().signInWithPopup(provider)
+    history.push('/user/dashboard')
   } catch (err) {
     dispatch({ type: SIGNUP_ERROR, err })
   }

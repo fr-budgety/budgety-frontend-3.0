@@ -16,7 +16,7 @@ import { RouteComponentProps } from 'react-router-dom';
 import RegisterPasswordMeter from '../register-password-meter/RegisterPasswordMeter';
 
 interface RegisterFormProps extends RouteComponentProps<any> {
-  signUp: (email: string, password: string) => void;
+  signUp: (email: string, password: string, history: any) => void;
   auth: RegisterFormState;
 }
 
@@ -30,7 +30,7 @@ const RegisterForm: React.SFC<RegisterFormProps> = (props) => {
    */
   const handleSignUp = async ({ email, password }: { email: string; password: string }) => {
     try {
-      await props.signUp(email, password);
+      await props.signUp(email, password, props.history);
       setMessage(undefined);
     } catch (error) {
       setMessage(error.message);
@@ -122,7 +122,7 @@ const RegisterForm: React.SFC<RegisterFormProps> = (props) => {
 const mapStateToProps = (state: RegisterFormState) => ({ firebase: state.firebase.auth, auth: state.auth });
 const mapDispatchToProps = (dispatch: ThunkDispatch<RegisterFormState, undefined, any>) => {
   return {
-    signUp: (email: string, password: string) => dispatch(signUp(email, password)),
+    signUp: (email: string, password: string, history: any) => dispatch(signUp(email, password, history)),
   };
 };
 

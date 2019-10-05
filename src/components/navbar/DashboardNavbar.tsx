@@ -26,7 +26,7 @@ interface DashboardNavbarProps {
   displayName?: string | null;
   photoURL?: string | null;
   brandText: string;
-  signOut: () => void;
+  signOut: (history: any) => void;
 }
 
 const DashboardNavbar: React.SFC<DashboardNavbarProps & RouteComponentProps> = (props) => {
@@ -59,7 +59,7 @@ const DashboardNavbar: React.SFC<DashboardNavbarProps & RouteComponentProps> = (
                 </DropdownItem>
                 <DropdownItem href="#" onClick={(e) => e.preventDefault()}>
                   <i className="ni ni-user-run" />
-                  <span onClick={props.signOut}>Logout</span>
+                  <span onClick={() => props.signOut(props.history)}>Logout</span>
                 </DropdownItem>
               </DropdownMenu>
             </UncontrolledDropdown>
@@ -78,7 +78,7 @@ const mapStateToProps = (state: any) => ({
 
 const mapDispatchToProps = (dispatch: ThunkDispatch<LoginFormState, undefined, any>) => {
   return {
-    signOut: () => dispatch(signOut()),
+    signOut: (history: any) => dispatch(signOut(history)),
   };
 };
 

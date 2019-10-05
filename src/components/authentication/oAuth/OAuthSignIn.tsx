@@ -3,22 +3,25 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { ThunkDispatch } from 'redux-thunk';
+import { withRouter } from 'react-router';
+import { RouteComponentProps } from 'react-router-dom';
 
 import { signInWithGoogle } from '../../../redux/actions/authActions';
 
 import { Button } from 'reactstrap';
 
-interface OAuthSignInProps {
+interface OAuthSignInProps extends RouteComponentProps<any> {
   signInWithGoogle: (event: React.MouseEvent<any, MouseEvent>) => void;
+  history: any;
 }
-const OAuthSignIn: React.SFC<OAuthSignInProps> = ({ signInWithGoogle }) => {
+const OAuthSignIn: React.SFC<OAuthSignInProps> = ({ signInWithGoogle, history }) => {
   return (
     <div className="text-center">
       <Button
         className="btn-neutral btn-icon"
         color="default"
         href="#"
-        onClick={signInWithGoogle}
+        onClick={() => signInWithGoogle(history)}
         data-test="google-oauth"
       >
         <span className="btn-inner--icon">
@@ -31,11 +34,11 @@ const OAuthSignIn: React.SFC<OAuthSignInProps> = ({ signInWithGoogle }) => {
 };
 const mapDispatchToProps = (dispatch: ThunkDispatch<undefined, undefined, any>) => {
   return {
-    signInWithGoogle: () => dispatch(signInWithGoogle()),
+    signInWithGoogle: (history: any) => dispatch(signInWithGoogle(history)),
   };
 };
 
 export default connect(
   null,
   mapDispatchToProps
-)(OAuthSignIn);
+)(withRouter(OAuthSignIn));

@@ -8,7 +8,7 @@ import { withRouter } from 'react-router';
 import { connect } from 'react-redux';
 import { ThunkDispatch } from 'redux-thunk';
 
-import { signIn, signOut } from '../../../../redux/actions/authActions';
+import { signIn } from '../../../../redux/actions/authActions';
 import { LoginFormState } from '../../../../redux/store/types';
 
 import { Button, FormGroup, Form, Input, InputGroup, Alert } from 'reactstrap';
@@ -17,11 +17,11 @@ import { SigninSchema } from '../../../../utils/validation/validationSchemas.yup
 
 interface LoginFormProps extends RouteComponentProps<any> {
   className?: string;
-  signIn: (email: string, password: string) => void;
+  signIn: (email: string, password: string, history: any) => void;
   auth: LoginFormState;
 }
 
-const LoginForm: React.FC<LoginFormProps> = ({ className, signIn, auth }) => {
+const LoginForm: React.FC<LoginFormProps> = ({ className, signIn, auth, history }) => {
   const [message, setMessage] = useState<string | undefined>(undefined);
   const [type, setType] = useState<string | undefined>(undefined);
 
@@ -31,7 +31,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ className, signIn, auth }) => {
    */
   const handleSignIn = async ({ email, password }: { email: string; password: string }) => {
     try {
-      await signIn(email, password);
+      await signIn(email, password, history);
       setMessage(undefined);
     } catch (error) {
       setMessage(error.message);
@@ -104,14 +104,12 @@ const LoginForm: React.FC<LoginFormProps> = ({ className, signIn, auth }) => {
 };
 const mapDispatchToProps = (dispatch: ThunkDispatch<LoginFormState, undefined, any>) => {
   return {
-    signIn: (email: string, password: string) => dispatch(signIn(email, password)),
+    signIn: (email: string, password: string, history: any) => dispatch(signIn(email, password, history)),
   };
 };
 const mapStateToProps = (state: LoginFormState) => ({ firebase: state.firebase.auth, auth: state.auth });
 
-export default withRouter(
-  connect(
-    mapStateToProps,
-    mapDispatchToProps
-  )(LoginForm)
-);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(withRouter(LoginForm));
