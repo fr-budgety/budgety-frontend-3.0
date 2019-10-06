@@ -1,4 +1,5 @@
 import { LOGIN_ERROR, LOGIN_SUCCESS, SIGNUP_SUCCESS, SIGNUP_ERROR } from '../actionTypes'
+import { defaultCategories } from '../../utils/categories/defaultCategories';
 
 /**
  * @function signIn - Get username, password, as string and dispatch login actions
@@ -42,7 +43,10 @@ export const signUp = (email, password, history) => async (dispatch, getState, {
   const firestore = getFirestore();
   try {
     const resp = await firebase.auth().createUserWithEmailAndPassword(email, password)
+    //User enrich email in user collection
     await firestore.collection('users').doc(resp.user.uid).set({ email })
+    //User enrich default categories in categories collection
+    await firestore.collection('categories').doc(resp.user.uid).set(defaultCategories)
     dispatch({ type: SIGNUP_SUCCESS })
     history.push('/')
   } catch (err) {
