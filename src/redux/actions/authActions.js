@@ -8,7 +8,9 @@ import { LOGIN_ERROR, LOGIN_SUCCESS, SIGNUP_SUCCESS, SIGNUP_ERROR } from '../act
 export const signIn = (email, password, history) => async (dispatch, getState, { getFirebase }) => {
   const firebase = getFirebase();
   try {
-    await firebase.auth().signInWithEmailAndPassword(email, password);
+    const signedInToken = await firebase.auth().signInWithEmailAndPassword(email, password);
+    const seriealizedSignedInToken = JSON.stringify(signedInToken);
+    await localStorage.setItem('loggedIn', seriealizedSignedInToken);
     await dispatch({ type: LOGIN_SUCCESS })
     history.push('/user/dashboard')
   } catch (err) {
@@ -23,6 +25,7 @@ export const signOut = (history) => async (dispatch, getState, { getFirebase }) 
   const firebase = getFirebase();
   try {
     await firebase.auth().signOut();
+    localStorage.clear('loggedIn');
     history.push('/')
   } catch (err) {
     throw (err)
