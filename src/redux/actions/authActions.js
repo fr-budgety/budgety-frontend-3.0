@@ -1,4 +1,7 @@
 import { LOGIN_ERROR, LOGIN_SUCCESS, SIGNUP_SUCCESS, SIGNUP_ERROR } from '../actionTypes'
+
+import { getCategories } from './categoriesActions';
+
 import { defaultCategories } from '../../utils/categories/defaultCategories';
 
 /**
@@ -10,8 +13,9 @@ export const signIn = (email, password, history) => async (dispatch, getState, {
   const firebase = getFirebase();
   try {
     const signedInToken = await firebase.auth().signInWithEmailAndPassword(email, password);
-    const seriealizedSignedInToken = JSON.stringify(signedInToken);
+    const seriealizedSignedInToken = await JSON.stringify(signedInToken);
     await localStorage.setItem('loggedIn', seriealizedSignedInToken);
+    await dispatch(getCategories(signedInToken.user.uid));
     await dispatch({ type: LOGIN_SUCCESS })
     history.push('/user/dashboard')
   } catch (err) {
