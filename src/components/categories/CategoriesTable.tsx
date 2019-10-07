@@ -1,8 +1,9 @@
 import React from 'react';
 import { Badge, Card, CardHeader, Media, Table, Container, Row } from 'reactstrap';
+
 import { Link } from 'react-router-dom';
 
-const CategoriesTable: React.FC = () => {
+const CategoriesTable: React.FC = (props: any) => {
   return (
     <Container className="mt--7" fluid>
       {/* Table */}
@@ -52,5 +53,4 @@ const CategoriesTable: React.FC = () => {
     </Container>
   );
 };
-
 export default CategoriesTable;
