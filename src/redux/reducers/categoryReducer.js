@@ -2,7 +2,7 @@
 import { CATEGORIES_REQUEST_ERROR, CATEGORIES_REQUEST_SUCCESS } from '../actionTypes'
 
 const initialState = {
-  categories: {},
+  categories: [],
   categoriesError: null
 };
 const categoriesReducer = (state = initialState, action) => {

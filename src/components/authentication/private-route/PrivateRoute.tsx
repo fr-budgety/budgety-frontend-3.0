@@ -22,7 +22,6 @@ const PrivateRoute: React.FC<PrivateRouteProps> = ({ component: Component, fireb
     const userToken = loadTokenFromLocalstorage();
     const isLoggedIn = checkIfUserIsLoggedIn(userToken);
     setAuthorized(isLoggedIn);
-    console.log(authorized);
   });
 
   /**

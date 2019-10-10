@@ -1,6 +1,6 @@
 /** @format */
 
-import React from 'react';
+import React, { ReactNode } from 'react';
 
 import Sidebar from '../components/sidebar/Sidebar';
 import DashboardNavbar from '../components/navbar/DashboardNavbar';
@@ -8,11 +8,12 @@ import DashboardNavbar from '../components/navbar/DashboardNavbar';
 import routes from '../utils/routes/routes';
 
 interface DashboardLayoutProps {
-  children?: any;
+  children?: ReactNode;
   brandText?: string;
+  brandGradient?: string;
 }
 
-const DashboardLayout: React.FC<DashboardLayoutProps> = ({ children, brandText }) => {
+const DashboardLayout: React.FC<DashboardLayoutProps> = ({ children, brandText, brandGradient }) => {
   return (
     <>
       <Sidebar
@@ -24,10 +25,10 @@ const DashboardLayout: React.FC<DashboardLayoutProps> = ({ children, brandText }
         routes={routes}
       />
       <div className="main-content">
-        <div className="header bg-gradient-default pb-8 pt-5 pt-md-8">
+        <div className={`header ${brandGradient} pb-8 pt-5 pt-md-8`}>
           <DashboardNavbar brandText={brandText ? brandText : 'Loading'} />
-          {children}
         </div>
+        {children}
       </div>
     </>
   );

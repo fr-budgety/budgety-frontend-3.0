@@ -41,11 +41,15 @@
 @import 'bootstrap/utilities';
 @import 'bootstrap/print';
 
-// Argon utilities and components
+// Utilities and components
 
 @import 'custom/reboot';
 @import 'custom/utilities';
 @import 'custom/components';
+
+// Cusom components
+
+@import 'components/CategoriesTable';
 
 // Vendor (Plugins)
 

@@ -1,2 +1,7 @@
-- Static category page
-- Dynamic category page associated on user enrich category
+- Toaster
+- Testing
+- Categories Header
+- Icons color
+
+@ToDo:
+- Write better typescript

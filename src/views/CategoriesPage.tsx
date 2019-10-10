@@ -1,10 +1,12 @@
 /** @format */
 
-import React, { SFC, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { ThunkDispatch } from 'redux-thunk';
 
 import { getCategories } from '../redux/actions/categoriesActions';
+
+import { Category } from '../types';
 
 import DashboardLayout from '../layouts/DashboardLayout';
 import CategoriesTable from '../components/categories/CategoriesTable';
@@ -12,7 +14,7 @@ import CategoriesTable from '../components/categories/CategoriesTable';
 interface CategoriesPageProps {
   auth: any;
   getCategories: any;
-  categories: any;
+  categories: Category[];
 }
 
 const CategoriesPage: React.FC<CategoriesPageProps> = ({ auth, getCategories, categories }) => {
@@ -22,9 +24,8 @@ const CategoriesPage: React.FC<CategoriesPageProps> = ({ auth, getCategories, ca
     }
   });
   return (
-    <DashboardLayout brandText="CATEGORIES">
-      {console.log(categories)}
-      <CategoriesTable />
+    <DashboardLayout brandText="CATEGORIES" brandGradient="bg-gradient-blue">
+      <CategoriesTable categories={categories} />
     </DashboardLayout>
   );
 };
@@ -32,7 +33,7 @@ const mapStateToProps = (state: any) => ({
   auth: state.firebase.auth,
   categories: state.categories.categories,
 });
-const mapDispatchToProps = (dispatch: ThunkDispatch<any, undefined, any>) => {
+const mapDispatchToProps = (dispatch: ThunkDispatch<any, null, any>) => {
   return {
     getCategories: (id: string) => dispatch(getCategories(id)),
   };
