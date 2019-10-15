@@ -3,5 +3,7 @@ export interface Category {
   name: string;
   type: string;
   icon: string;
+  link: string;
+  color: string;
   createdAt: number;
 }

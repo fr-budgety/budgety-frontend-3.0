@@ -1,7 +1,12 @@
 - Toaster
 - Testing
-- Categories Header
-- Icons color
+
+Production:
+- test build
+
+Categories: 
+- add incomes
+- correct colors
 
 @ToDo:
 - Write better typescript

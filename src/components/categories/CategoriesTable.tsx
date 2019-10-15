@@ -1,8 +1,6 @@
 import React from 'react';
 import { Badge, Card, CardHeader, Media, Table, Container, Row } from 'reactstrap';
 
-import { Link } from 'react-router-dom';
-
 import { IProps } from './types';
 
 const CategoriesTable: React.FC<IProps> = (props) => {
@@ -28,19 +26,20 @@ const CategoriesTable: React.FC<IProps> = (props) => {
                 {props.categories.map((category) => (
                   <tr key={category.id}>
                     <th scope="row">
-                      <Link to={`/user/categories${category.name}`}>
-                        <Media className="align-items-center icon-badge">
-                          <i className={`ni ni-${category.icon}`} />
-                          <Media>
-                            <span className="mb-0 text-sm">{category.name}</span>
-                          </Media>
+                      <Media className="align-items-center icon-badge">
+                        <i
+                          className={`ni ni-${category.icon}`}
+                          style={{ backgroundColor: category.color, color: 'white' }}
+                        />
+                        <Media>
+                          <span className="mb-0 text-sm">{category.name}</span>
                         </Media>
-                      </Link>
+                      </Media>
                     </th>
                     <td>
                       <Badge color="" className="badge-dot mr-4">
                         <i className="bg-warning" />
-                        {category.type}
+                        {category.type.charAt(0).toUpperCase() + category.type.slice(1)}
                       </Badge>
                     </td>
                     <td>2 transactions</td>
