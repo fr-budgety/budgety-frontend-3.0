@@ -1,5 +1,8 @@
 - Toaster
-- Testing
+- Loading
+
+Testing:
+- React testing library
 
 Production:
 - test build
