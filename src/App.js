@@ -7,12 +7,14 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 import thunk from 'redux-thunk';
 import { reactReduxFirebase, getFirebase } from 'react-redux-firebase'
 import { reduxFirestore, getFirestore } from 'redux-firestore'
+import { ToastContainer, toast } from 'react-toastify';
 
 import fbConfig from './config/base';
 
 import "./assets/vendor/nucleo/css/nucleo.css";
 import "./assets/vendor/@fortawesome/fontawesome-free/css/all.min.css";
 import "./assets/scss/dashboard.scss";
+import 'react-toastify/dist/ReactToastify.css';
 
 import SignUpPage from './views/SignupPage';
 import rootReducer from './redux/reducers/rootReducer';
@@ -29,19 +31,24 @@ const store = createStore(rootReducer, composeWithDevTools(
 ));
 
 const App = () => {
-  console.log('Project ID: ', process.env.REACT_APP_FIREBASE_APP_ID)
+  const notifyA = () => toast('Wow so easy !');
+
   return (
-    <Provider store={store}>
-      <Router>
-        <Switch>
-          <PrivateRoute exact path='/user/dashboard' component={MainPage} />
-          <PrivateRoute exact path='/user/categories' component={CategoriesPage} />
-          <Route exact path="/auth/login" component={SignInPage} />
-          <Route exact path="/auth/register" component={SignUpPage} />
-          <Route exact path="/" render={props => <SignInPage {...props} />} />
-        </Switch>
-      </Router>
-    </Provider>
+    <React.Fragment>
+      <ToastContainer enableMultiContainer />
+      <button onClick={notifyA}>Notify A !</button>
+      <Provider store={store}>
+        <Router>
+          <Switch>
+            <PrivateRoute exact path='/user/dashboard' component={MainPage} />
+            <PrivateRoute exact path='/user/categories' component={CategoriesPage} />
+            <Route exact path="/auth/login" component={SignInPage} />
+            <Route exact path="/auth/register" component={SignUpPage} />
+            <Route exact path="/" render={props => <SignInPage {...props} />} />
+          </Switch>
+        </Router>
+      </Provider>
+    </React.Fragment>
   )
 }
 
