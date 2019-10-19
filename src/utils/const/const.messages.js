@@ -10,3 +10,12 @@ export const INPUT_ERRORS = {
   passwordStrenghtNumbers: 'Use at least a symbol and a number',
   privacy: 'You must accept the Privacy Policy'
 };
+
+/**
+ * Toaster Messages
+ */
+export const TOASTER_MESSAGES = {
+  loginSuccess: 'You logged in succesfully',
+  signOut: 'You succesfully signed out',
+  registrationSuccess: 'You succesfully registered',
+}

@@ -7,7 +7,7 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 import thunk from 'redux-thunk';
 import { reactReduxFirebase, getFirebase } from 'react-redux-firebase'
 import { reduxFirestore, getFirestore } from 'redux-firestore'
-import { ToastContainer, toast } from 'react-toastify';
+import { ToastContainer } from 'react-toastify';
 
 import fbConfig from './config/base';
 
@@ -31,12 +31,9 @@ const store = createStore(rootReducer, composeWithDevTools(
 ));
 
 const App = () => {
-  const notifyA = () => toast('Wow so easy !');
-
   return (
     <React.Fragment>
       <ToastContainer enableMultiContainer />
-      <button onClick={notifyA}>Notify A !</button>
       <Provider store={store}>
         <Router>
           <Switch>

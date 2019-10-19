@@ -1,5 +1,7 @@
 import { LOGIN_ERROR, LOGIN_SUCCESS, SIGNUP_SUCCESS, SIGNUP_ERROR } from '../actionTypes'
 
+import { toast } from 'react-toastify';
+import { TOASTER_MESSAGES } from '../../utils/const/const.messages'
 import { getCategories } from './categoriesActions';
 
 import { defaultCategories } from '../../utils/categories/defaultCategories';
@@ -17,7 +19,8 @@ export const signIn = (email, password, history) => async (dispatch, getState, {
     await localStorage.setItem('loggedIn', seriealizedSignedInToken);
     await dispatch(getCategories(signedInToken.user.uid));
     await dispatch({ type: LOGIN_SUCCESS })
-    history.push('/user/dashboard')
+    await history.push('/user/dashboard')
+    await toast(TOASTER_MESSAGES.loginSuccess);
   } catch (err) {
     dispatch({ type: LOGIN_ERROR, err })
   }
@@ -30,8 +33,9 @@ export const signOut = (history) => async (dispatch, getState, { getFirebase }) 
   const firebase = getFirebase();
   try {
     await firebase.auth().signOut();
-    localStorage.clear('loggedIn');
-    history.push('/')
+    await localStorage.clear('loggedIn');
+    await history.push('/')
+    await toast(TOASTER_MESSAGES.signOut);
   } catch (err) {
     throw (err)
   }
@@ -52,7 +56,8 @@ export const signUp = (email, password, history) => async (dispatch, getState, {
     //User enrich default categories in categories collection
     await firestore.collection('categories').doc(resp.user.uid).set(defaultCategories)
     dispatch({ type: SIGNUP_SUCCESS })
-    history.push('/')
+    await history.push('/')
+    await toast(TOASTER_MESSAGES.registrationSuccess);
   } catch (err) {
     dispatch({ type: SIGNUP_ERROR, err })
   }
