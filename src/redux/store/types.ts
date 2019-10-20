@@ -11,3 +11,7 @@ export interface LoginFormState {
   authError: string;
   auth: any;
 }
+
+export interface AuthenticationLayoutState {
+  isLoading: boolean;
+}

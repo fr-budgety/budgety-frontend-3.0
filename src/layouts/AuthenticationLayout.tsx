@@ -1,18 +1,21 @@
 /** @format */
 
 import React from 'react';
+import { connect } from 'react-redux';
 
 import { Container } from 'reactstrap';
 import LinearLoader from '../components/commons/linear-loader/LinearLoader';
+import { AuthenticationLayoutState } from '../redux/store/types';
 
 interface AuthenticationLayoutProps {
   children?: any;
+  isLoading: boolean;
 }
 
-const AuthenticationLayout: React.FC<AuthenticationLayoutProps> = ({ children }) => {
+const AuthenticationLayout: React.FC<AuthenticationLayoutProps> = ({ children, isLoading }) => {
   return (
     <React.Fragment>
-      <LinearLoader />
+      {isLoading && <LinearLoader />}
       <div className="main-content">
         <div className="header py-6 py-lg-6">
           <Container>
@@ -24,4 +27,8 @@ const AuthenticationLayout: React.FC<AuthenticationLayoutProps> = ({ children })
   );
 };
 
-export default AuthenticationLayout;
+const mapStateToProps = (state: AuthenticationLayoutState) => ({
+  isLoading: state.isLoading,
+});
+
+export default connect(mapStateToProps)(AuthenticationLayout);
